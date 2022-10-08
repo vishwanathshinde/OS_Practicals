@@ -51,7 +51,7 @@ void print_output()
     NODE *p;
     float avg_tat = 0, avg_wt = 0;
 
-    printf("pname\tat\tbt\tct\ttat\twt\n")
+    printf("pname\tat\tbt\tct\ttat\twt\n");
 
         p = first;
     while (p != NULL)
@@ -67,7 +67,7 @@ void print_output()
         p = p->next;
     }
 
-    printf("Avg TAT=%f\tAvg WT=%f\n", avg_wt / n);
+    printf("Avg TAT=%f\tAvg WT=%f\n", avg_tat/n,avg_wt/n);
 }
 
 void print_input()
@@ -75,7 +75,7 @@ void print_input()
     NODE *p;
     p = first;
 
-    printf("pname\tat\tbt\n")
+    printf("pname\tat\tbt\n");
 
         while (p != NULL)
     {
@@ -98,9 +98,9 @@ void sort()
         {
             if (p->at > q->at)
             {
-                strcpy(name, p->name);
-                strcpy(q->name, q->name);
-                strcpy(q->name, name);
+                strcpy(name, p->pname);
+                strcpy(p->pname, q->pname);
+                strcpy(q->pname, name);
 
                 t = p->at;
                 p->at = q->at;
@@ -209,11 +209,11 @@ void print_gantt_chart()
 
         for (k = 0; k < m / 2; k++)
             printf("-");
-            printf("%s", s1[i].pname)
+            printf("%s", s1[i].pname);
 
             for (k = 0; k < (m+1) / 2; k++)
                 printf("-");
-                printf("%s", s1[i].end)
+                printf("%s", s1[i].end);
     }
 }
 
