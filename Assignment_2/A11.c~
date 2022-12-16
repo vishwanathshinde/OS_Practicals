@@ -1,0 +1,46 @@
+#include<stdio.h>
+
+void main()
+{
+  int bt[10]={0}, at[10]={0}, tat[10]={0}, wt[10]={0}, ct[10]={0},
+
+  int sum = 0, n, i, j, k;
+  float totalTAT = 0, totalWT = 0;
+
+  printf("Enter the no of process: \n");
+  scanf("%d", &n);
+
+  printf("Enter the arrival time and Burst time: \n");
+  
+  for(i=0; i<n; i++)
+  {
+     printf("Arrival time of process [%d]: ", i+1);
+     scanf("%d", &at[i]);
+
+     printf("Enter the cpu Burst time [%d]\n: ", i+1);
+     scanf("%d", &bt[i]);
+   }
+
+  for(i=1; i<n; i++)  
+  {
+    sum=sum+bt[i];
+    ct[i]=ct[i]+sum;
+  }
+
+ //Calcuate TAT and WT
+
+  for(j=0; j<n; j++)
+  {
+    tat[j]=ct[j]-at[j];
+    totalTAT = totalTAT + tat[j];
+  }
+  for(k=0; k<n; k++)
+  {
+    wt[k] = tat[k] - bt[k];
+  }
+  
+//Gantt Chart
+
+  printf("0 \t\t\t%d\t\t %d\t %d\t %d\t", ct[0],ct[1],ct[2],ct[3]);
+  printf("---------------------------------------------------------------------\n");
+  printf("0 \t\t\t%d\t\t %d\t %d\t %d\t", ct[0],ct[1],ct[2],ct[3]);

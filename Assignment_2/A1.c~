@@ -36,7 +36,7 @@ void gantt_chart()
   printf("\n|----------------------|\n");
   printf("");
   for(i=1; i<=n; i++)
-  printf("%d\t",wt[i]);
+  printf("%d   ",wt[i]);
   printf("%d",wt[n]+Bu[n]);
 }
 
@@ -61,7 +61,7 @@ void calculate()
 }
 
 
-void chart()
+/*void chart()
 {
   int i;
   printf("\n\nProcess\t Arrival Time\t Burst Time\tWaiting Time\tTurnAroundTime\n");
@@ -74,7 +74,7 @@ void chart()
     Tat[i] = wt[i] + Bu[i];
     printf("%d\t%d\t\t%d\t\t%d\t\t%d\n", i, A[i], Bu[i], wt[i], Tat[i]);
   }
-}
+}*/
 
 void fcfs()
 {
@@ -99,10 +99,9 @@ void fcfs()
       }
     }
   }
-  calculate();
   gantt_chart();
-  chart();
-  //calculate();
+  //chart();
+  calculate();
 }
 
 int main()

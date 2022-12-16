@@ -5,7 +5,7 @@
 int main(int ac, char *av[])
 {
     int pid;
-    pid=fork();
+    pid=fork(); // fork() can't be used in windows. It will run online and in Linux
 
     if(pid==0)
     {
