@@ -1,0 +1,2 @@
+count[j]=next;
+            // next++;

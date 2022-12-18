@@ -1,59 +1,66 @@
-#include<stdio.h>
-void main()
+#include <stdio.h>
+
+int main()
 {
-    int i,j,k,min,rs[25],m[10],count[10],flag[25],n,f,pf=0,next=0;
-    printf("Enter the length of the reference string --");
-    scanf("%d",&n);
-    printf("Enter the reference string -- ");
-    for(i=0;i<n;i++)
+    int i, j, k, np, nf, frame[10], ref_string[50], count[10], page_found[25], min, next = 0, fault = 0;
+
+    printf("Enter the length of reference string: ");
+    scanf("%d", &np);
+
+    printf("Enter the reference strings: ");
+    for (i = 0; i < np; i++)
     {
-        scanf("%d",&rs[i]);
-        flag[i]=0;
+        scanf("%d", &ref_string[i]);
+        page_found[i] = 0;
     }
-    printf("Enter the number of frames -- ");
-    scanf("%d",&f);
-    for(i=0;i<f;i++)
+    printf("Enter the no of frames: ");
+    scanf("%d", &nf);
+
+    for (i = 0; i < nf; i++)
     {
-        count[i]=0;
-        m[i]=-1;
+        count[i] = 0;
+        frame[i] = -1;
     }
-printf("\nThe Page Replacement process is -- \n");
-for(i=0;i<n;i++)
-{
-    for(j=0;j<f;j++)
+    printf("The LRU page replacement process is: \n");
+
+    for (i = 0; i < np; i++)
     {
-        if(m[j]==rs[i])
+        for (j = 0; j < nf; j++)
         {
-            flag[i]=1;
-            count[j]=next;
-            next++;
+            if (frame[j] == ref_string[i]) // page requested compared with existing content of frame
+            {
+                page_found[i] = 1;
+                count[j] = next;
+                next++;
+            }
         }
-    }
-    if(flag[i]==0)
-    {
-        if(i<f)
+        if (page_found[i] == 0) // page requested is not found in frame
         {
-            m[i]=rs[i];
-            count[i]=next;
-            next++;
+            if (i < nf)
+            {
+                frame[i] = ref_string[i];
+                count[i] = next;
+                next++;
+            }
+            else
+            {
+                min = 0;
+                for (j = 0; j < nf; j++)
+                {
+                    if (count[min] > count[j])
+                        min = j;
+                }
+                frame[min] = ref_string[i];
+                count[min] = next;
+                next++;
+            }
+            fault++;
         }
-        else
-        {
-            min=0;
-            for(j=0;j<f;j++)
-            if(count[min] > count[j])
-                min=j;
-            m[min]=rs[i];
-            count[min]=next;
-            next++;
-        }
-        pf++;
+        for (j = 0; j < nf; j++)
+            printf("%d\t", frame[j]);
+        if (page_found[i] == 0)
+            printf(" PF no %d: ", fault);
+        printf("\n");
     }
-    for(j=0;j<f;j++)
-    printf("%d\t",m[j]);
-    if(flag[i]==0)
-    printf("PF no. -- %d",pf);
-    printf("\n");
-}
-printf("\nThe number of page faults using LRU are %d",pf);
+    printf("\nThe number of page faults using LRU are %d", fault);
 }
