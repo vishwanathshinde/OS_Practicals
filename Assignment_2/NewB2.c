@@ -88,7 +88,6 @@ void chart()
 
 }
 
-
 int main()
 {
     getdata();
